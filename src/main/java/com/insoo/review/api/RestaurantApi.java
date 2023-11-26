@@ -2,12 +2,16 @@ package com.insoo.review.api;
 
 
 import com.insoo.review.api.request.CreateAndEditRestaurantRequest;
+import com.insoo.review.api.response.RestaurantDetailView;
+import com.insoo.review.api.response.RestaurantView;
 import com.insoo.review.model.RestaurantEntity;
 import com.insoo.review.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.DocFlavor;
+import java.time.ZonedDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -16,15 +20,15 @@ public class RestaurantApi {
     private final RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
-    public String getRestaurants() {
-        return "This is getRestaurants";
+    public List<RestaurantView> getRestaurants() {
+        return restaurantService.getAllRestaurants();
     }
 
     @GetMapping("/restaurant/{restaurantId}")
-    public String getRestaurant(
+    public RestaurantDetailView getRestaurant(
             @PathVariable Long restaurantId
     ) {
-        return "This is getRestaurant, " + restaurantId;
+        return restaurantService.getRestaurantDetail(restaurantId);
     }
 
     @PostMapping("/restaurant")
