@@ -2,7 +2,9 @@ package com.insoo.review.api;
 
 import com.insoo.review.api.request.CreateReviewRequest;
 import com.insoo.review.service.ReviewService;
+import com.insoo.review.service.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,5 +26,15 @@ public class ReviewApi {
             @PathVariable("reviewId") Long reviewId
     ) {
         reviewService.deleteReview(reviewId);
+    }
+
+    @GetMapping("/restaurant/{restaurantId}/reviews")
+    public ReviewDto getRestaurantReviews(
+            @PathVariable("restaurantId") Long restaurantId,
+            @RequestParam("offset") Integer offset,
+            @RequestParam("limit") Integer limit
+    ) {
+        return reviewService.getRestaurantReview(restaurantId,
+                PageRequest.of(offset / limit, limit));
     }
 }
