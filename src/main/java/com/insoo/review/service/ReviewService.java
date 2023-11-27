@@ -5,12 +5,10 @@ import com.insoo.review.repository.RestaurantRepository;
 import com.insoo.review.repository.ReviewRepository;
 import com.insoo.review.service.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.ZonedDateTime;
 
 @Service
@@ -59,5 +57,4 @@ public class ReviewService {
                 )
                 .build();
     }
-
 }
